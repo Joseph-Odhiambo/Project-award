@@ -2,8 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from .forms import SignupForm, PostForm, UpdateUserForm, UpdateUserProfileForm, RatingsForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
+from .models import Profile, Post, Rating
+from .serializers import ProfileSerializer, UserSerializer, PostSerializer
 
-
+from django.contrib.auth import login, authenticate
+import random
 
 
 # Create your views here.
@@ -27,3 +33,17 @@ def index(request):
     except Post.DoesNotExist:
         posts = None
     return render(request, 'index.html', {'posts': posts, 'form': form, 'random_post': random_post})
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
