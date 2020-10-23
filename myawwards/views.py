@@ -1,18 +1,14 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
-from .forms import SignupForm, PostForm, UpdateUserForm, UpdateUserProfileForm, RatingsForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
+from .forms import SignupForm, PostForm, UpdateUserForm, UpdateUserProfileForm, RatingsForm
+from rest_framework import viewsets
 from .models import Profile, Post, Rating
 from .serializers import ProfileSerializer, UserSerializer, PostSerializer
-
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 import random
 
-
-# Create your views here.
 
 def index(request):
     if request.method == "POST":
@@ -33,6 +29,7 @@ def index(request):
     except Post.DoesNotExist:
         posts = None
     return render(request, 'index.html', {'posts': posts, 'form': form, 'random_post': random_post})
+
 
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -77,6 +74,7 @@ def user_profile(request, username):
         'user_prof': user_prof,
     }
     return render(request, 'userprofile.html', params)
+
 
 @login_required(login_url='login')
 def edit_profile(request, username):
@@ -142,7 +140,6 @@ def project(request, post):
 
     }
     return render(request, 'project.html', params)
-
 
 
 def search_project(request):
