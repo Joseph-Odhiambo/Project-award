@@ -11,10 +11,10 @@ This project allows users to post their projects for other users to rate accordi
 ## Screenshots 
 ###### Home page
  
-<img src="">
+<img src="https://github.com/Joseph-Odhiambo/Project-award/blob/master/static/images/shots/landing.png?raw=true" width="800px" height="400px">
  
  ###### Projects
- <img src=""> 
+ <img src="https://github.com/Joseph-Odhiambo/Project-award/blob/master/static/images/shots/websites.png?raw=true" width="800px" height="400px"> 
 
 
  
